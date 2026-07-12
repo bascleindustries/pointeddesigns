@@ -1,0 +1,210 @@
+/* ============================================================================
+   PARE — Design Tokens
+   Colors + Typography foundations for the Pare iOS app.
+   Import this file, then use the semantic variables in your components.
+
+   Fonts: Fraunces (serif display) + Inter (sans body), both Google Fonts.
+   Load them once per document:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- RAW PALETTE -------------------------------------------------------
+     Cool off-whites + warm-leaning neutrals. Never warm cream/beige.
+     mauve is precious (2–3 uses per screen). pearl handles structure. */
+
+  /* Backgrounds — cool off-whites */
+  --chalk: #F7F6F4;   /* primary background */
+  --mist:  #EEEDEA;   /* lifted cards */
+  --fog:   #E1DFDB;   /* dividers, recessed surfaces */
+
+  /* Text — warm-leaning neutrals */
+  --ink:   #1A1A1C;   /* primary text */
+  --slate: #5E5E60;   /* secondary text, metadata */
+  --smoke: #9A9A9C;   /* tertiary text, helper copy */
+
+  /* Actions + accents */
+  --pewter: #44404B;  /* primary button fill — a soft purpley-grey */
+  --mauve: #B89AA3;   /* PRIMARY accent — emotional/celebratory only */
+  --pearl: #C8C5BE;   /* SECONDARY accent — all structural needs */
+  --petal: #E8D4DA;   /* palest mauve — selected-state backgrounds, sparingly */
+
+  /* Functional — minimal use */
+  --heather: #9A8AA6; /* confirmation states (light purpley mauve, dusty) */
+  --plum:    #5C3D4A; /* destructive confirmations (never bright red) */
+
+  /* ---- SEMANTIC COLOR ALIASES ------------------------------------------- */
+  --bg:            var(--chalk);
+  --bg-card:       var(--mist);
+  --bg-recessed:   var(--fog);
+  --bg-selected:   var(--petal);
+
+  --fg:            var(--ink);     /* primary text */
+  --fg-secondary:  var(--slate);   /* metadata, secondary */
+  --fg-tertiary:   var(--smoke);   /* helper copy */
+
+  --accent:        var(--mauve);   /* precious accent */
+  --structure:     var(--pearl);   /* structural accent */
+
+  --divider:       var(--fog);
+  --border:        var(--fog);
+
+  --btn-primary-bg:   var(--pewter);
+  --btn-primary-fg:   var(--chalk);
+  --btn-secondary-fg: var(--slate);
+
+  --confirm:       var(--heather);
+  --destructive:   var(--plum);
+
+  /* ---- TYPE FAMILIES ----------------------------------------------------- */
+  --font-display: 'Fraunces', 'Times New Roman', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* ---- TYPE SCALE (iOS-oriented, px) ------------------------------------ */
+  --size-hero:    72px;  /* the pared count */
+  --size-display: 40px;  /* milestone moments, large serif numbers */
+  --size-title:   28px;  /* section headings, tile labels (serif) */
+  --size-heading: 22px;  /* secondary headings */
+  --size-prompt:  26px;  /* today's invitation (serif) */
+  --size-body:    17px;  /* body / counts / buttons (iOS default) */
+  --size-meta:    15px;  /* metadata */
+  --size-caption: 13px;  /* helper text */
+  --size-label:   12px;  /* tiny uppercase labels */
+
+  /* ---- WEIGHTS ----------------------------------------------------------- */
+  --weight-display: 400;  /* Fraunces is always regular weight */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+
+  /* ---- LINE HEIGHTS ------------------------------------------------------ */
+  --leading-tight:  1.05;  /* hero / display numerals */
+  --leading-snug:   1.2;   /* headings */
+  --leading-normal: 1.45;  /* body */
+  --leading-relaxed:1.6;   /* helper copy */
+
+  /* ---- TRACKING ---------------------------------------------------------- */
+  --tracking-label:  0.08em;  /* uppercase labels */
+  --tracking-tight: -0.01em;  /* large serif display */
+
+  /* ---- RADII ------------------------------------------------------------- */
+  --radius-card:  16px;
+  --radius-tile:  16px;
+  --radius-chip:  999px;  /* icon chips, pills */
+  --radius-pill:  999px;  /* buttons */
+  --radius-photo: 4px;    /* photos in the swipe gallery */
+
+  /* ---- ELEVATION (very subtle — 1pt @ ≤4% max) -------------------------- */
+  --shadow-card:  0 1px 2px rgba(26, 26, 28, 0.04);
+  --shadow-lift:  0 4px 16px rgba(26, 26, 28, 0.06);   /* swipe card in motion */
+  --shadow-none:  none;
+
+  /* ---- SPACING (8pt base) ------------------------------------------------ */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+
+  /* ---- PROGRESS ---------------------------------------------------------- */
+  --progress-height: 3px;
+  --progress-track:  rgba(200, 197, 190, 0.30);  /* pearl @ 30% */
+  --progress-fill:   var(--pearl);               /* pearl @ 100% */
+
+  /* ---- MOTION ------------------------------------------------------------ */
+  --ease-gentle: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */  /* settle, no bounce */
+  --dur-quick:   180ms; /* @kind other */
+  --dur-calm:    320ms; /* @kind other */
+}
+
+/* ============================================================================
+   SEMANTIC TYPE CLASSES
+   Use these directly in markup, or copy their declarations into components.
+============================================================================ */
+
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--size-hero);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--size-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg);
+}
+
+.t-prompt {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--size-prompt);
+  line-height: var(--leading-snug);
+  color: var(--fg);
+}
+
+.t-title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--size-title);
+  line-height: var(--leading-snug);
+  color: var(--fg);
+}
+
+.t-heading {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--size-heading);
+  line-height: var(--leading-snug);
+  color: var(--fg);
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--size-body);
+  line-height: var(--leading-normal);
+  color: var(--fg);
+}
+
+.t-meta {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--size-meta);
+  line-height: var(--leading-normal);
+  color: var(--fg-secondary);
+}
+
+.t-caption {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--size-caption);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-tertiary);
+}
+
+.t-label {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--size-label);
+  line-height: 1;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+}
+
+/* The brand period — used on counts, wordmark, milestone moments */
+.t-period { color: var(--accent); }
