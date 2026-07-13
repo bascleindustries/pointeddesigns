@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pare — Pare down.</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--chalk);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--slate); text-decoration: none; }
+  a:hover { color: var(--ink); }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---- Nav ---- */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 32px 0;
+  }
+  .nav-mark {
+    font-family: var(--font-display);
+    font-size: 24px; letter-spacing: -0.015em; color: var(--ink);
+  }
+  .nav-mark .p { color: var(--mauve); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: var(--size-meta); color: var(--slate);
+  }
+  .nav-links a.btn-primary { color: var(--chalk); }
+
+  /* ---- Buttons ---- */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--pewter); color: var(--chalk);
+    border-radius: var(--radius-pill);
+    padding: 14px 28px;
+    font-family: var(--font-body); font-size: var(--size-body); font-weight: var(--weight-medium);
+    transition: background var(--dur-quick) var(--ease-gentle), transform var(--dur-quick) var(--ease-gentle);
+  }
+  .btn-primary:hover { background: #524d5a; color: var(--chalk); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary svg { width: 18px; height: 18px; }
+
+  /* ---- Hero ---- */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 64px;
+    align-items: center;
+    padding: 96px 0 128px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 9vw, 104px);
+    line-height: 1.02;
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 32px;
+  }
+  .hero h1 .p { color: var(--mauve); }
+  .hero .sub {
+    font-size: 19px; line-height: var(--leading-relaxed); color: var(--slate);
+    max-width: 42ch; margin: 0 0 40px;
+  }
+  .hero-note {
+    font-size: var(--size-caption); color: var(--smoke);
+    margin-top: 16px;
+  }
+
+  /* ---- Abstract swipe stack ---- */
+  .stack {
+    position: relative;
+    height: 420px;
+  }
+  .stack .card {
+    position: absolute;
+    inset: 0;
+    background: var(--mist);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+  .stack .card.back2 { transform: translateY(24px) scale(0.92); background: var(--fog); }
+  .stack .card.back1 { transform: translateY(12px) scale(0.96); }
+  .stack .card.front {
+    box-shadow: var(--shadow-lift);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 16px;
+  }
+  .stack .card.front .ph {
+    width: 68%; height: 58%;
+    background: var(--fog);
+    border-radius: var(--radius-photo);
+  }
+  .stack .card.front .cap {
+    font-size: var(--size-caption); color: var(--smoke);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .stack .card.front {
+      animation: glide 5.2s var(--ease-gentle) infinite;
+    }
+    @keyframes glide {
+      0%, 58%   { transform: translateX(0) rotate(0deg); opacity: 1; }
+      72%       { transform: translateX(-120px) rotate(-4deg); opacity: 0; }
+      73%       { transform: translateX(0) rotate(0deg); opacity: 0; }
+      86%, 100% { transform: translateX(0) rotate(0deg); opacity: 1; }
+    }
+  }
+
+  /* ---- Section scaffolding ---- */
+  section { padding: 96px 0; }
+  section + section { border-top: 1px solid var(--fog); }
+  .label {
+    font-family: var(--font-body); font-weight: var(--weight-medium);
+    font-size: var(--size-label); letter-spacing: var(--tracking-label);
+    text-transform: uppercase; color: var(--slate);
+    margin: 0 0 24px;
+  }
+  .section-title {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: var(--size-display); line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 16px;
+  }
+  .section-sub {
+    color: var(--slate); max-width: 52ch; margin: 0 0 64px;
+  }
+
+  /* ---- Gestures ---- */
+  .gestures {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+  }
+  .gesture .glyph {
+    width: 48px; height: 48px;
+    border-radius: var(--radius-chip);
+    background: var(--pearl);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .gesture .glyph svg { width: 20px; height: 20px; stroke: var(--ink); }
+  .gesture h3 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: var(--size-heading); margin: 0 0 8px;
+  }
+  .gesture p { font-size: var(--size-meta); color: var(--slate); margin: 0; }
+
+  /* ---- Surfaces ---- */
+  .surfaces {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .surface {
+    background: var(--mist);
+    border-radius: var(--radius-tile);
+    padding: 28px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .surface .chip {
+    width: 32px; height: 32px;
+    border-radius: var(--radius-chip);
+    background: var(--pearl);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .surface .chip svg { width: 16px; height: 16px; stroke: var(--ink); }
+  .surface h3 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: var(--size-heading); margin: 0;
+  }
+  .surface p { font-size: var(--size-meta); color: var(--slate); margin: 0; }
+
+  /* ---- Closing / CTA ---- */
+  .closing { text-align: center; padding: 128px 0; }
+  .closing .count {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: clamp(56px, 8vw, 88px);
+    line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);
+    font-variant-numeric: lining-nums tabular-nums;
+    margin: 0 0 16px;
+  }
+  .closing .count .p { color: var(--mauve); }
+  .closing .caption { color: var(--slate); margin: 0 0 48px; }
+
+  /* ---- Footer ---- */
+  footer {
+    border-top: 1px solid var(--fog);
+    padding: 48px 0 64px;
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .foot-mark {
+    font-family: var(--font-display); font-size: 20px; color: var(--ink);
+  }
+  .foot-mark .p { color: var(--mauve); }
+  footer .fine { font-size: var(--size-caption); color: var(--smoke); }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 64px 0 80px; }
+    .stack { height: 320px; max-width: 340px; }
+    .gestures { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
+    .surfaces { grid-template-columns: 1fr; }
+    .nav-links a:not(.btn-primary) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav data-screen-label="Nav">
+    <a class="nav-mark" href="index.html" style="color: var(--ink);">Pointed Designs<span class="p">.</span></a>
+    <div class="nav-links">
+      <a class="btn-primary" href="#" style="padding: 10px 22px; font-size: 15px;">Download</a>
+    </div>
+  </nav>
+
+  <header class="hero" data-screen-label="Hero">
+    <div>
+      <h1>Pare down<span class="p">.</span></h1>
+      <p class="sub">A quieter way through your phone. Sift through photos, screenshots, contacts, and more with a few gentle swipes — keep what matters, let the rest go.</p>
+      <a class="btn-primary" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download on the App Store
+      </a>
+      <p class="hero-note">Free to try. No accounts. No servers. On device. Simple.</p>
+    </div>
+    <div class="stack" aria-hidden="true">
+      <div class="card back2"></div>
+      <div class="card back1"></div>
+      <div class="card front">
+        <div class="ph"></div>
+        <div class="cap">Screenshot &middot; October 2023</div>
+      </div>
+    </div>
+  </header>
+</div>
+
+<div class="wrap">
+  <section id="gestures" data-screen-label="Gestures">
+    <p class="label">The gestures</p>
+    <h2 class="section-title">Four moves. That's the whole app.</h2>
+    <p class="section-sub">Each item appears on its own, like a print on a gallery wall. You decide, it settles, the next one arrives.</p>
+    <div class="gestures">
+      <div class="gesture">
+        <div class="glyph"><i data-lucide="arrow-left"></i></div>
+        <h3>Pare</h3>
+        <p>Swipe left to let it go.</p>
+      </div>
+      <div class="gesture">
+        <div class="glyph"><i data-lucide="arrow-right"></i></div>
+        <h3>Keep</h3>
+        <p>Swipe right and it stays, exactly where it was.</p>
+      </div>
+      <div class="gesture">
+        <div class="glyph"><i data-lucide="arrow-up"></i></div>
+        <h3>Defer</h3>
+        <p>Swipe up if you can't decide. You'll come back to it.</p>
+      </div>
+      <div class="gesture">
+        <div class="glyph"><i data-lucide="hand"></i></div>
+        <h3>Organize</h3>
+        <p>Long-press a kept item to place it in an album, group, or folder.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="surfaces" data-screen-label="Surfaces">
+    <p class="label">The surfaces</p>
+    <h2 class="section-title">Six places your phone quietly fills up.</h2>
+    <p class="section-sub">Pare works through each one the same way — a few minutes at a time, whenever you have them.</p>
+    <div class="surfaces">
+      <div class="surface">
+        <div class="chip"><i data-lucide="image"></i></div>
+        <h3>Photos</h3>
+        <p>Duplicates, blurry shots, and seven takes of the same sunset.</p>
+      </div>
+      <div class="surface">
+        <div class="chip"><i data-lucide="scan-text"></i></div>
+        <h3>Screenshots</h3>
+        <p>Recipes, receipts, and conversations — read and sorted for you.</p>
+      </div>
+      <div class="surface">
+        <div class="chip"><i data-lucide="users"></i></div>
+        <h3>Contacts</h3>
+        <p>Duplicates, no-name numbers, and people from three phones ago.</p>
+      </div>
+      <div class="surface">
+        <div class="chip"><i data-lucide="calendar"></i></div>
+        <h3>Calendar</h3>
+        <p>Old events, declined invitations, recurring things that ended.</p>
+      </div>
+      <div class="surface">
+        <div class="chip"><i data-lucide="check"></i></div>
+        <h3>Reminders</h3>
+        <p>Completed lists and errands from another season of your life.</p>
+      </div>
+      <div class="surface">
+        <div class="chip"><i data-lucide="folder"></i></div>
+        <h3>Files</h3>
+        <p>Large files and old downloads you never meant to keep.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" data-screen-label="Closing">
+    <p class="count">4,328 pared<span class="p">.</span></p>
+    <p class="caption">Past tense. That's the feeling.</p>
+    <a class="btn-primary" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on the App Store
+    </a>
+  </section>
+
+  <footer data-screen-label="Footer">
+    <a class="foot-mark" href="index.html">Pointed Designs<span class="p">.</span></a>
+    <div style="display: flex; gap: 24px; align-items: baseline;">
+      <a class="fine" href="terms.html" style="font-size: var(--size-caption);">Terms of Service</a>
+      <a class="fine" href="privacy.html" style="font-size: var(--size-caption);">Privacy Policy</a>
+      <p class="fine">No accounts. No servers. On device. Simple.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
+</script>
+
+</body>
+</html>
