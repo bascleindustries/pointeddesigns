@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pointed Designs</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--chalk);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--slate); text-decoration: none; }
+  a:hover { color: var(--ink); }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 32px 0;
+  }
+  .nav-mark {
+    font-family: var(--font-display);
+    font-size: 24px; letter-spacing: -0.015em; color: var(--ink);
+  }
+  .nav-mark .p { color: var(--mauve); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { font-size: var(--size-meta); color: var(--slate); }
+  .nav-links a:hover { color: var(--ink); }
+
+  .hero { padding: 112px 0 96px; max-width: 720px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(56px, 8vw, 92px);
+    line-height: 1.04;
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 28px;
+  }
+  .hero h1 .p { color: var(--mauve); }
+  .hero .sub {
+    font-size: 19px; line-height: var(--leading-relaxed); color: var(--slate);
+    max-width: 46ch; margin: 0;
+  }
+
+  .label {
+    font-family: var(--font-body); font-weight: var(--weight-medium);
+    font-size: var(--size-label); letter-spacing: var(--tracking-label);
+    text-transform: uppercase; color: var(--slate);
+    margin: 0 0 32px;
+  }
+
+  .apps { padding: 32px 0 128px; }
+  .app-list { display: grid; gap: 16px; }
+  .app-card {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 28px;
+    align-items: center;
+    background: var(--mist);
+    border-radius: var(--radius-card);
+    padding: 36px 40px;
+    transition: background var(--dur-quick) var(--ease-gentle), box-shadow var(--dur-quick) var(--ease-gentle);
+  }
+  a.app-card:hover { background: var(--pearl); box-shadow: var(--shadow-card); color: inherit; }
+  div.app-card h2 { color: var(--smoke); }
+  .app-card .icon {
+    width: 56px; height: 56px;
+    border-radius: var(--radius-chip);
+    background: var(--chalk);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-card);
+  }
+  .app-card .icon svg { width: 24px; height: 24px; stroke: var(--ink); }
+  .app-card h2 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: var(--size-title); line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 6px; color: var(--ink);
+  }
+  .app-card h2 .p { color: var(--mauve); }
+  .app-card p { margin: 0; color: var(--slate); font-size: var(--size-body); max-width: 52ch; }
+  .app-card .go {
+    color: var(--smoke);
+    display: flex; align-items: center;
+    transition: transform var(--dur-quick) var(--ease-gentle), color var(--dur-quick) var(--ease-gentle);
+  }
+  a.app-card:hover .go { transform: translateX(4px); color: var(--ink); }
+  .app-card .go svg { width: 20px; height: 20px; }
+
+  .ethos {
+    border-top: 1px solid var(--fog);
+    padding: 112px 0;
+    text-align: center;
+  }
+  .ethos p {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: var(--size-display); line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    max-width: 22ch; margin: 0 auto;
+  }
+  .ethos p .p { color: var(--mauve); }
+
+  footer {
+    border-top: 1px solid var(--fog);
+    padding: 48px 0 64px;
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .foot-mark { font-family: var(--font-display); font-size: 20px; color: var(--ink); }
+  .foot-mark .p { color: var(--mauve); }
+  footer .fine { font-size: var(--size-caption); color: var(--smoke); }
+
+  @media (max-width: 720px) {
+    .hero { padding: 72px 0 64px; }
+    .app-card { grid-template-columns: 1fr; gap: 16px; padding: 28px; }
+    .app-card .go { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav data-screen-label="Nav">
+    <div class="nav-mark">Pointed Designs<span class="p">.</span></div>
+    <div class="nav-links">
+      <a href="pare.html">Pare</a>
+    </div>
+  </nav>
+
+  <header class="hero" data-screen-label="Hero">
+    <h1>Apps with a point<span class="p">.</span></h1>
+    <p class="sub">Pointed Designs makes lifestyle apps for <em>you</em>.</p>
+  </header>
+
+  <section class="apps" data-screen-label="Apps">
+    <p class="label">The apps</p>
+    <div class="app-list">
+      <a class="app-card" href="pare.html">
+        <div class="icon"><i data-lucide="scissors"></i></div>
+        <div>
+          <h2>Pare<span class="p">.</span></h2>
+          <p>A simpler way through your phone. Sift through photos, screenshots, contacts, and more with a few gentle swipes.</p>
+        </div>
+        <div class="go"><i data-lucide="arrow-right"></i></div>
+      </a>
+      <div class="app-card">
+        <div class="icon"><i data-lucide="layout-list"></i></div>
+        <div>
+          <h2>Coming soon<span class="p">.</span></h2>
+        </div>
+        <div class="go"></div>
+      </div>
+      <div class="app-card">
+        <div class="icon"><i data-lucide="footprints"></i></div>
+        <div>
+          <h2>Coming soon<span class="p">.</span></h2>
+        </div>
+        <div class="go"></div>
+      </div>
+      <div class="app-card">
+        <div class="icon"><i data-lucide="utensils"></i></div>
+        <div>
+          <h2>Coming soon<span class="p">.</span></h2>
+        </div>
+        <div class="go"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ethos" data-screen-label="Ethos">
+    <p>Designed with intention, made for living<span class="p">.</span></p>
+  </section>
+
+  <footer data-screen-label="Footer">
+    <div class="foot-mark">Pointed Designs<span class="p">.</span></div>
+    <p class="fine">&copy; 2026 Pointed Designs</p>
+  </footer>
+</div>
+
+<script>
+  lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
+</script>
+
+</body>
+</html>
